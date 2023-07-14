@@ -7,8 +7,8 @@ import {useState} from 'react'
 import Comments from './Comments';
 import axios from 'axios';
 import { CircularProgress } from '@material-ui/core';
-import { useSelector,useDispatch } from 'react-redux';
-import { addAllData,handleUpdatePostState,handlePostCommentState} from '../redux/postSlicer';
+import {useDispatch } from 'react-redux';
+import { addAllData,handleUpdatePostState} from '../redux/postSlicer';
 const style = {
   position: 'absolute',
   top: '50%',
@@ -22,7 +22,6 @@ const style = {
 };
 
 function ChildModal(props) {
-  console.log(props)
   const [postinfo,setPostInfo]=useState({
     title:'',
     body:''
@@ -91,7 +90,6 @@ const Updatedstyle = {
 
 function UpdatedModal(props) {
   const [allData, setAllData] = useState([]);
-  const [flag, setFlag] = useState(false);
   const [comments, setComments] = React.useState([]);
   const [comment, setComment] = useState({
     name: '',
@@ -146,7 +144,6 @@ function UpdatedModal(props) {
     try{
     let updatedPosts = [...JSON.parse(localStorage.getItem('usersData'))];
     const postPostion = updatedPosts[props?.userIndex - 1].posts.findIndex((item) => item?.id === props?.postIndex);
-    console.log(postPostion)
     const post = updatedPosts[props?.userIndex - 1].posts[postPostion];
     if(post.comments.length===0){
       const newComment = {
@@ -156,7 +153,6 @@ function UpdatedModal(props) {
         postId: props?.postIndex,
         id: 0
       };
-    console.log(newComment)
     updatedPosts[props?.userIndex - 1].posts[postPostion].comments = [newComment, ...updatedPosts[props?.userIndex - 1].posts[postPostion].comments];
     setComments([...updatedPosts[props?.userIndex - 1].posts[postPostion].comments]);
     setAllData(updatedPosts);
@@ -174,8 +170,6 @@ function UpdatedModal(props) {
         postId: props?.postIndex,
         id: commentId
       };
-    console.log( post.comments[post?.comments?.length - 1]?.id + 1)
-    console.log(newComment)
     updatedPosts[props?.userIndex - 1].posts[postPostion].comments = [newComment, ...updatedPosts[props?.userIndex - 1].posts[postPostion].comments];
     setComments([...updatedPosts[props?.userIndex - 1].posts[postPostion].comments]);
     localStorage.setItem('usersData', JSON.stringify(updatedPosts));

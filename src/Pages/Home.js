@@ -6,7 +6,7 @@ import PostForm from "../Components.js/PostForm";
 import "./Home.css";
 import Navbar from "../Components.js/Navbar";
 import { useSelector,useDispatch } from "react-redux";
-import { addUsers, handleAddPostState} from "../redux/postSlicer";
+import {handleAddPostState} from "../redux/postSlicer";
 
 function PostManager() {
   const [userIndex, setIndex] = useState(0);
@@ -32,7 +32,6 @@ function PostManager() {
 
   const handleToggle = (event) => {
     setView(event.target.checked);
-    console.log(event.target.checked);
   };
 
   return (
