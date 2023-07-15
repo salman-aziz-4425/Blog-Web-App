@@ -3,7 +3,7 @@ import { Box, FormControlLabel, Switch, Button } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import PostHandler from "../Components/PostHandler";
 import PostForm from "../Components/PostForm";
-import "./Home.css";
+import "./styles/Home.css";
 import Navbar from "../Components/Navbar";
 import { useSelector,useDispatch } from "react-redux";
 import {handleAddPostState} from "../redux/postSlicer";

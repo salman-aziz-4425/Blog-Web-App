@@ -1,49 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Typography, TextField, Button, Link } from '@mui/material';
-import { styled } from '@mui/system';
+import {  Button,} from '@mui/material';
+import {Container,Form,Input,ButtonWrapper,Heading,LoginLink} from './styles/loginandsignup'
 import { useDispatch } from 'react-redux';
 import { addAllData, addUsers } from '../redux/postSlicer';
 import 'react-toastify/dist/ReactToastify.css';
-import toast, { Toaster } from 'react-hot-toast';
-const Container = styled('div')({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  height: '100vh',
-  backgroundColor: '#f9f9f9',
-});
-
-const Form = styled('form')({
-  display: 'flex',
-  flexDirection: 'column',
-  width: '400px',
-  padding: '32px',
-  borderRadius: '4px',
-  backgroundColor: '#ffffff',
-});
-
-const Input = styled(TextField)({
-  marginBottom: '16px',
-});
-
-const ButtonWrapper = styled('div')({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-});
-
-const Heading = styled(Typography)({
-  fontSize: '2rem',
-  fontWeight: 'bold',
-  marginBottom: '24px',
-});
-
-const LoginLink = styled(Typography)({
-  fontSize: '0.875rem',
-  marginTop: '16px',
-});
+import toast from 'react-hot-toast';
 
 function SignupPage() {
   const [userData, setUserData] = useState({
