@@ -1,13 +1,10 @@
-import React from 'react';
 
+import React, { useState } from 'react';
 function SignupPage() {
-  
   return (
-    <>
-    <h1>
-      Post APP
-    </h1>
-    </>
+ <>
+ <h1>post app</h1>
+ </>
   );
 }
 
