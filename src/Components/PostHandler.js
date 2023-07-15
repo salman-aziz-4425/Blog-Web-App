@@ -3,6 +3,7 @@ import { Button, Typography, Card, CardContent, CardActions } from '@material-ui
 import DeleteIcon from '@mui/icons-material/Delete';
 import CommentIcon from '@mui/icons-material/Comment';
 import EditIcon from '@mui/icons-material/Edit';
+import {ChildModal,UpdatedModal} from './Modal';
 import {useDispatch} from 'react-redux'
 import { handleDeletePostState } from '../redux/postSlicer';
 function PostHandler(props) {
@@ -66,6 +67,8 @@ function PostHandler(props) {
           </CardActions>
         </Card>
       ))}
+        <ChildModal open={open} handleClose={handleClose} userIndex={props.index} postIndex={postIndex} handleUpdatePost={props.handleUpdatePost} />
+        <UpdatedModal open={openUpdate} handleClose={handleupdateClose} userIndex={props.index} postIndex={postIndex} activeIndex={props.activeIndex}/>
     </>
   );
 }
