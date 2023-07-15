@@ -4,22 +4,25 @@ import Home from './Pages/Home';
 import Login from './Pages/Login';
 import { useSelector } from 'react-redux';
 const ProtectedRoute = ({ userStatus, children }) => {
-
   return  children ;
 };
 
 const OpeningProtectedRoute = ({ userStatus, children }) => {
+
+
   return  children ;
 };
 
 const App = () => {
+  const userStatus = useSelector((state) => state.postHandler.users) || 0;
+  console.log(userStatus)
   return (
     <Router>
       <Routes>
         <Route
           exact path="/"
           element={
-            <OpeningProtectedRoute >
+            <OpeningProtectedRoute userStatus={userStatus}>
                <Login />
             </OpeningProtectedRoute>
           }
@@ -27,7 +30,7 @@ const App = () => {
         <Route
           path="Home"
           element={
-            <ProtectedRoute >
+            <ProtectedRoute userStatus={userStatus}>
               <Home />
             </ProtectedRoute>
           }
