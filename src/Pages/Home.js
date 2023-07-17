@@ -1,12 +1,11 @@
-import React from "react";
-import "./styles/LoginPage.module.css";
-
+import React, { useEffect, useState, useCallback } from "react";
+import "./Home.css";
 function PostManager() {
-  return(
-  <>
-  <h1 style={{color:'black'}}>Welcome Post Manager</h1>
-  </>
-  )
+  return (
+    <>
+    <h1>Home</h1>
+    </>
+  );
 }
 
 export default PostManager;
