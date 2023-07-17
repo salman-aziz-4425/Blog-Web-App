@@ -4,7 +4,7 @@ const initialState = {
   allData:[]
 };
 
-export const postSlice = createSlice({
+export  const postSlice = createSlice({
   name: 'postHandler',
   initialState,
   reducers: {
@@ -56,3 +56,5 @@ export const postSlice = createSlice({
 });
 
 export const { addUsers,addAllData,handleDeletePostState,handleUpdatePostState,handleAddPostState,handlePostCommentState } = postSlice.actions;
+
+export default postSlice.reducer;
