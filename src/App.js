@@ -4,12 +4,16 @@ import Home from './Pages/Home';
 import Login from './Pages/Login';
 import { useSelector } from 'react-redux';
 const ProtectedRoute = ({ userStatus, children }) => {
+  if (userStatus === 0) {
+    return <Navigate to="/" />;
+  }
   return  children ;
 };
 
 const OpeningProtectedRoute = ({ userStatus, children }) => {
-
-
+  if (userStatus !== 0) {
+    return <Navigate to="/Home" />;
+  }
   return  children ;
 };
 
