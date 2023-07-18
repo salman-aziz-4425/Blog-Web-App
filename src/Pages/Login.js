@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { addAllData, addUsers } from '../redux/postSlicer';
 import 'react-toastify/dist/ReactToastify.css';
 import toast from 'react-hot-toast';
-import {Container,Form,Input,ButtonWrapper,Heading,LoginLink} from "../Components/StyledComponents"
+import {Container,Form,Input,ButtonWrapper,Heading,LoginLink} from "./styles/loginandsignup"
 
 
 
