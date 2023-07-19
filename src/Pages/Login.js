@@ -171,14 +171,14 @@ function SignupPage() {
         {
           inputProps.map((item,index)=>(
             item.visibility==='visible'&&<Input
-            key={index}
-            name={item.name}
-            type={item.type}
-            label={item.label}
-            placeholder={item.placeholder}
-            variant={item.variant}
-            value={item.value}
-            onChange={handleChange}
+            key= {index}
+            name= {item.name}
+            type= {item.type}
+            label= {item.label}
+            placeholder= {item.placeholder}
+            variant= {item.variant}
+            value= {item.value}
+            onChange= {handleChange}
           />
           ))
         }
