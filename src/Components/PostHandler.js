@@ -12,7 +12,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import { ChildModal, UpdatedModal } from "./Modal";
 import { useDispatch } from "react-redux";
 import { handleDeletePostState } from "../redux/postSlicer";
+
 function PostHandler(props) {
+
   const [open, setOpen] = React.useState(false);
   const [openUpdate, setUpdated] = React.useState(false);
   const [postIndex, setPostIndex] = useState(0);
@@ -24,7 +26,6 @@ function PostHandler(props) {
 
   const handleupdate = (post) => {
     setUpdated(true);
-    console.log("user Index" + props.index);
     setPostIndex(post.id);
   };
 
@@ -88,20 +89,24 @@ function PostHandler(props) {
           </CardActions>
         </Card>
       ))}
-      <ChildModal
-        open={open}
-        handleClose={handleClose}
-        userIndex={props.index}
-        postIndex={postIndex}
-        handleUpdatePost={props.handleUpdatePost}
-      />
-      <UpdatedModal
-        open={openUpdate}
-        handleClose={handleupdateClose}
-        userIndex={props.index}
-        postIndex={postIndex}
-        activeIndex={props.activeIndex}
-      />
+      {
+        postIndex !== 0 && <div>
+          <ChildModal
+          open={open}
+          handleClose={handleClose}
+          userIndex={props.index}
+          postIndex={postIndex}
+          handleUpdatePost={props.handleUpdatePost}
+        />
+        <UpdatedModal
+          open={openUpdate}
+          handleClose={handleupdateClose}
+          userIndex={props.index}
+          postIndex={postIndex}
+          activeIndex={props.activeIndex}
+        />
+        </div>
+      }
     </>
   );
 }

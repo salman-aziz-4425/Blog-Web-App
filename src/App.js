@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Home from './Pages/Home';
 import Login from './Pages/Login';
 import { useSelector } from 'react-redux';
+
 const ProtectedRoute = ({ userStatus, children }) => {
   if (userStatus === 0) {
     return <Navigate to="/" />;
@@ -19,7 +20,6 @@ const OpeningProtectedRoute = ({ userStatus, children }) => {
 
 const App = () => {
   const userStatus = useSelector((state) => state.postHandler.users) || 0;
-  console.log(userStatus)
   return (
     <Router>
       <Routes>

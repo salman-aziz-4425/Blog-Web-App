@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { Box, FormControlLabel, Switch, Button } from "@material-ui/core";
+import { Box, FormControlLabel, Switch} from "@material-ui/core";
 import { Typography } from "@material-ui/core";
+import { useSelector,useDispatch } from "react-redux";
+import {handleAddPostState} from "../redux/postSlicer";
 import PostHandler from "../Components/PostHandler";
 import PostForm from "../Components/PostForm";
 import Navbar from "../Components/Navbar";
-import { useSelector,useDispatch } from "react-redux";
-import {handleAddPostState} from "../redux/postSlicer";
 
 function PostManager() {
+  
   const [userIndex, setIndex] = useState(0);
   const [newPostTitle, setNewPostTitle] = useState("");
   const [newPostContent, setNewPostContent] = useState("");
@@ -16,6 +17,7 @@ function PostManager() {
   const dispatch=useDispatch()
   const userindex=useSelector((state)=>state.postHandler.users)
   let alLUsers=useSelector((state)=>state.postHandler.allData)
+
   useEffect(() => {
     setAllData([...alLUsers]);
     setIndex(userindex);
@@ -27,6 +29,9 @@ function PostManager() {
       dispatch(handleAddPostState({userId:userIndex,newPostTitle,newPostContent}))
       alert("Post added successfully");
     }
+    else{
+      alert("Please fill all the fields")
+    }
   });
 
   const handleToggle = (event) => {
@@ -36,9 +41,6 @@ function PostManager() {
   return (
     <>
     <Navbar/>
-
-   
-
 <div style={{ width: "600px", margin: "0 auto", padding: 16 }}>
   <Typography variant="h4" align="center" gutterBottom>
     Hello, {allData[userIndex - 1]?.name}

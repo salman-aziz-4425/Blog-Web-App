@@ -1,15 +1,12 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Typography, TextField, Button, Link } from '@mui/material';
-import { styled } from '@mui/system';
+import {Button} from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { addAllData, addUsers } from '../redux/postSlicer';
 import 'react-toastify/dist/ReactToastify.css';
 import toast from 'react-hot-toast';
 import {Container,Form,Input,ButtonWrapper,Heading,LoginLink} from "./styles/loginandsignup"
-
-
 
 function SignupPage() {
   const [userData, setUserData] = useState({

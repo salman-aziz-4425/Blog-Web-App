@@ -4,11 +4,12 @@ import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import { TextField } from "@material-ui/core";
 import { useState } from "react";
-import Comments from "./Comments";
 import axios from "axios";
 import { CircularProgress } from "@material-ui/core";
 import { useDispatch } from "react-redux";
+import Comments from "./Comments";
 import { addAllData, handleUpdatePostState } from "../redux/postSlicer";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -32,7 +33,6 @@ function ChildModal(props) {
       ...postinfo,
       [e.target.name]: e.target.value,
     });
-    console.log(postinfo);
   };
 
   return (
@@ -141,7 +141,7 @@ function UpdatedModal(props) {
           localStorage.setItem("usersData", JSON.stringify(updatedPosts));
         })
         .catch((error) => {
-          console.log(error);
+          return
         });
     }
     return () => {
@@ -157,7 +157,6 @@ function UpdatedModal(props) {
   };
 
   const handleAddComment = () => {
-    console.log("triggered");
     try {
       let updatedPosts = [...JSON.parse(localStorage.getItem("usersData"))];
       const postPostion = updatedPosts[props?.userIndex - 1].posts.findIndex(
