@@ -12,6 +12,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { ChildModal, UpdatedModal } from "./Modal";
 import { useDispatch } from "react-redux";
 import { handleDeletePostState } from "../redux/postSlicer";
+
 function PostHandler(props) {
   const [open, setOpen] = React.useState(false);
   const [openUpdate, setUpdated] = React.useState(false);

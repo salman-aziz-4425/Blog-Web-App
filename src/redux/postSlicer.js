@@ -4,7 +4,7 @@ const initialState = {
   allData:[]
 };
 
-export const postSlice = createSlice({
+export  const postSlice = createSlice({
   name: 'postHandler',
   initialState,
   reducers: {
