@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes,Navigate} from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
 const ProtectedRoute = ({ userStatus, children }) => {

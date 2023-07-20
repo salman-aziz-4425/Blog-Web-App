@@ -98,7 +98,6 @@ const Updatedstyle = {
 };
 
 function UpdatedModal(props) {
-  const [allData, setAllData] = useState([]);
   const [comments, setComments] = React.useState([]);
   const [comment, setComment] = useState({
     name: "",
@@ -110,7 +109,6 @@ function UpdatedModal(props) {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    setAllData(localStorage.getItem("usersData"));
     const allData = JSON.parse(localStorage.getItem("usersData"));
     let updatedPosts = [...allData];
     const postPostion = updatedPosts[props?.userIndex - 1].posts.findIndex(
@@ -122,7 +120,6 @@ function UpdatedModal(props) {
         setComments([
           ...updatedPosts[props.userIndex - 1].posts[postPostion].comments,
         ]);
-        setAllData(updatedPosts);
         localStorage.setItem("usersData", JSON.stringify(updatedPosts));
       } else {
         throw new Error("error");
@@ -179,7 +176,6 @@ function UpdatedModal(props) {
         setComments([
           ...updatedPosts[props?.userIndex - 1].posts[postPostion].comments,
         ]);
-        setAllData(updatedPosts);
         localStorage.setItem("usersData", JSON.stringify(updatedPosts));
         dispatch(addAllData(updatedPosts));
         alert("Comment Added");
@@ -202,7 +198,6 @@ function UpdatedModal(props) {
         ]);
         localStorage.setItem("usersData", JSON.stringify(updatedPosts));
         dispatch(addAllData(updatedPosts));
-        setAllData(updatedPosts);
         alert("Comment Added");
       }
     } catch (error) {
