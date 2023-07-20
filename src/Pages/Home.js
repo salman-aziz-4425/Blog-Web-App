@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { Box, FormControlLabel, Switch, Button } from "@material-ui/core";
+import React, { useEffect, useState} from "react";
+import { Box, FormControlLabel, Switch} from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import PostHandler from "../Components/PostHandler";
 import PostForm from "../Components/PostForm";
@@ -19,15 +19,15 @@ function PostManager() {
   useEffect(() => {
     setAllData([...alLUsers]);
     setIndex(userindex);
-  }, [alLUsers]);
+  }, [alLUsers, userindex]);
 
 
-  const handleAddPost = useCallback( ()=> {
+  const handleAddPost = ()=> {
     if (newPostTitle.trim() !== "" && newPostContent.trim() !== "") {
       dispatch(handleAddPostState({userId:userIndex,newPostTitle,newPostContent}))
       alert("Post added successfully");
     }
-  });
+  };
 
   const handleToggle = (event) => {
     setView(event.target.checked);
