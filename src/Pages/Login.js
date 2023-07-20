@@ -4,50 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { Box, Typography, TextField, Button, Link } from '@mui/material';
 import { styled } from '@mui/system';
 import { useDispatch } from 'react-redux';
-import { addAllData, addUsers } from '../redux/postSlicer';
 import 'react-toastify/dist/ReactToastify.css';
 import toast from 'react-hot-toast';
-
-
-const Container = styled('div')({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  height: '100vh',
-  backgroundColor: '#f9f9f9',
-});
-
-const Form = styled('form')({
-  display: 'flex',
-  flexDirection: 'column',
-  width: '400px',
-  padding: '32px',
-  borderRadius: '4px',
-  backgroundColor: '#ffffff',
-});
-
-const Input = styled(TextField)({
-  marginBottom: '16px',
-});
-
-const ButtonWrapper = styled('div')({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-});
-
-const Heading = styled(Typography)({
-  fontSize: '2rem',
-  fontWeight: 'bold',
-  marginBottom: '24px',
-});
-
-const LoginLink = styled(Typography)({
-  fontSize: '0.875rem',
-  marginTop: '16px',
-});
-
+import { addAllData, addUsers } from '../redux/postSlicer';
+import {Container,Form,Input,ButtonWrapper,Heading,LoginLink} from "./styles/loginandsignup"
 
 function SignupPage() {
   const [userData, setUserData] = useState({
@@ -171,14 +131,14 @@ function SignupPage() {
         {
           inputProps.map((item,index)=>(
             item.visibility==='visible'&&<Input
-            key= {index}
-            name= {item.name}
-            type= {item.type}
-            label= {item.label}
-            placeholder= {item.placeholder}
-            variant= {item.variant}
-            value= {item.value}
-            onChange= {handleChange}
+            key={index}
+            name={item.name}
+            type={item.type}
+            label={item.label}
+            placeholder={item.placeholder}
+            variant={item.variant}
+            value={item.value}
+            onChange={handleChange}
           />
           ))
         }

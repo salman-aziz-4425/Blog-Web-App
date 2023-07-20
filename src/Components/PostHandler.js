@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import {
   Button,
   Typography,
@@ -9,17 +9,15 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import CommentIcon from "@mui/icons-material/Comment";
 import EditIcon from "@mui/icons-material/Edit";
-import { MemoChildModal as ChildModal, UpdatedModal } from "./Modal";
+import { ChildModal, UpdatedModal } from "./Modal";
 import { useDispatch } from "react-redux";
 import { handleDeletePostState } from "../redux/postSlicer";
 
 function PostHandler(props) {
-
-  const [open, setOpen] = useState(false);
-  const [openUpdate, setUpdated] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [openUpdate, setUpdated] = React.useState(false);
   const [postIndex, setPostIndex] = useState(0);
   const dispatch = useDispatch();
-  
   const handleOpen = (post) => {
     setOpen(true);
     setPostIndex(post.id);
@@ -27,15 +25,16 @@ function PostHandler(props) {
 
   const handleupdate = (post) => {
     setUpdated(true);
+    console.log("user Index" + props.index);
     setPostIndex(post.id);
   };
 
   const handleupdateClose = () => {
     setUpdated(false);
   };
-  const handleClose = useCallback(() => {
+  const handleClose = () => {
     setOpen(false);
-  }, [open]);
+  };
   return (
     <>
       {props?.post.map((item) => (
@@ -90,17 +89,20 @@ function PostHandler(props) {
           </CardActions>
         </Card>
       ))}
-
-      <ChildModal open={open} handleClose={handleClose} postIndex={postIndex} />
-      {postIndex !== 0 && (
-        <UpdatedModal
-          open={openUpdate}
-          handleClose={handleupdateClose}
-          userIndex={props.index}
-          postIndex={postIndex}
-          activeIndex={props.activeIndex}
-        />
-      )}
+      <ChildModal
+        open={open}
+        handleClose={handleClose}
+        userIndex={props.index}
+        postIndex={postIndex}
+        handleUpdatePost={props.handleUpdatePost}
+      />
+      <UpdatedModal
+        open={openUpdate}
+        handleClose={handleupdateClose}
+        userIndex={props.index}
+        postIndex={postIndex}
+        activeIndex={props.activeIndex}
+      />
     </>
   );
 }

@@ -1,14 +1,14 @@
 import * as React from "react";
-import { useState,useEffect } from "react";
-import { useDispatch } from "react-redux";
-import axios from "axios";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
-import { TextField, CircularProgress } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
+import { useState } from "react";
 import Comments from "./Comments";
+import axios from "axios";
+import { CircularProgress } from "@material-ui/core";
+import { useDispatch } from "react-redux";
 import { addAllData, handleUpdatePostState } from "../redux/postSlicer";
-
 const style = {
   position: "absolute",
   top: "50%",
@@ -32,6 +32,7 @@ function ChildModal(props) {
       ...postinfo,
       [e.target.name]: e.target.value,
     });
+    console.log(postinfo);
   };
 
   return (
@@ -98,7 +99,7 @@ const Updatedstyle = {
 
 function UpdatedModal(props) {
   const [allData, setAllData] = useState([]);
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = React.useState([]);
   const [comment, setComment] = useState({
     name: "",
     email: "",
@@ -108,7 +109,7 @@ function UpdatedModal(props) {
   });
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  React.useEffect(() => {
     setAllData(localStorage.getItem("usersData"));
     const allData = JSON.parse(localStorage.getItem("usersData"));
     let updatedPosts = [...allData];
@@ -124,7 +125,10 @@ function UpdatedModal(props) {
         setAllData(updatedPosts);
         localStorage.setItem("usersData", JSON.stringify(updatedPosts));
       } else {
-        axios
+        throw new Error("error");
+      }
+    } catch {
+      axios
         .get(
           "https://jsonplaceholder.typicode.com/comments?postId=" +
             props.postIndex
@@ -135,14 +139,10 @@ function UpdatedModal(props) {
           ];
           setComments([...result.data]);
           localStorage.setItem("usersData", JSON.stringify(updatedPosts));
-          alert('Successfully fetched')
         })
         .catch((error) => {
-          alert('please check you connection')
+          console.log(error);
         });
-      }
-    } catch {
-      alert('Something went wrong')
     }
     return () => {
       setComments([]);
@@ -157,6 +157,7 @@ function UpdatedModal(props) {
   };
 
   const handleAddComment = () => {
+    console.log("triggered");
     try {
       let updatedPosts = [...JSON.parse(localStorage.getItem("usersData"))];
       const postPostion = updatedPosts[props?.userIndex - 1].posts.findIndex(
@@ -205,12 +206,12 @@ function UpdatedModal(props) {
         alert("Comment Added");
       }
     } catch (error) {
-      alert('Something went wrong')
+      alert(error);
     }
   };
 
   return (
-    <>
+    <React.Fragment>
       <Modal
         open={props.open}
         onClose={props.handleClose}
@@ -231,7 +232,7 @@ function UpdatedModal(props) {
         >
           <h2
             id="child-modal-title"
-            style= {{
+            style={{
               fontSize: "28px",
               marginBottom: "16px",
               marginTop: "8px",
@@ -250,10 +251,10 @@ function UpdatedModal(props) {
             fullWidth
             color="secondary"
             name="body"
-            onChange= {handleChange}
+            onChange={handleChange}
           />
           <Button
-            onClick= {handleAddComment}
+            onClick={handleAddComment}
             variant="contained"
             color="primary"
             style={{ marginBottom: "16px" }}
@@ -269,8 +270,8 @@ function UpdatedModal(props) {
           )}
         </Box>
       </Modal>
-    </>
+    </React.Fragment>
   );
 }
-const MemoChildModal = React.memo(ChildModal);
-export { MemoChildModal, UpdatedModal };
+
+export { ChildModal, UpdatedModal };
