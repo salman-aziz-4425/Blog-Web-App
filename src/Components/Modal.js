@@ -3,23 +3,12 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import { TextField } from "@material-ui/core";
-import { useState } from "react";
-import Comments from "./Comments";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { CircularProgress } from "@material-ui/core";
 import { useDispatch } from "react-redux";
+import Comments from "./Comments";
 import { addAllData, handleUpdatePostState } from "../redux/postSlicer";
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
 
 function ChildModal(props) {
   const [postinfo, setPostInfo] = useState({
@@ -32,7 +21,18 @@ function ChildModal(props) {
       ...postinfo,
       [e.target.name]: e.target.value,
     });
-    console.log(postinfo);
+  };
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
   };
 
   return (
@@ -85,20 +85,8 @@ function ChildModal(props) {
   );
 }
 
-const Updatedstyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
-
 function UpdatedModal(props) {
-  const [comments, setComments] = React.useState([]);
+  const [comments, setComments] = useState([]);
   const [comment, setComment] = useState({
     name: "",
     email: "",
@@ -108,13 +96,14 @@ function UpdatedModal(props) {
   });
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const allData = JSON.parse(localStorage.getItem("usersData"));
     let updatedPosts = [...allData];
     const postPostion = updatedPosts[props?.userIndex - 1].posts.findIndex(
       (item) => item?.id === props?.postIndex
     );
     const post = updatedPosts[props?.userIndex - 1].posts[postPostion];
+
     try {
       if (Object.keys(post).includes("comments")) {
         setComments([
@@ -122,24 +111,27 @@ function UpdatedModal(props) {
         ]);
         localStorage.setItem("usersData", JSON.stringify(updatedPosts));
       } else {
-        throw new Error("error");
+        if (postPostion === -1) {
+          return;
+        }
+        axios
+          .get(
+            "https://jsonplaceholder.typicode.com/comments?postId=" +
+              props.postIndex
+          )
+          .then((result) => {
+            updatedPosts[props.userIndex - 1].posts[postPostion].comments = [
+              ...result.data,
+            ];
+            setComments([...result.data]);
+            localStorage.setItem("usersData", JSON.stringify(updatedPosts));
+          })
+          .catch((error) => {
+            alert(error);
+          });
       }
     } catch {
-      axios
-        .get(
-          "https://jsonplaceholder.typicode.com/comments?postId=" +
-            props.postIndex
-        )
-        .then((result) => {
-          updatedPosts[props.userIndex - 1].posts[postPostion].comments = [
-            ...result.data,
-          ];
-          setComments([...result.data]);
-          localStorage.setItem("usersData", JSON.stringify(updatedPosts));
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      return;
     }
     return () => {
       setComments([]);
@@ -154,7 +146,7 @@ function UpdatedModal(props) {
   };
 
   const handleAddComment = () => {
-    console.log("triggered");
+    
     try {
       let updatedPosts = [...JSON.parse(localStorage.getItem("usersData"))];
       const postPostion = updatedPosts[props?.userIndex - 1].posts.findIndex(
@@ -179,6 +171,7 @@ function UpdatedModal(props) {
         localStorage.setItem("usersData", JSON.stringify(updatedPosts));
         dispatch(addAllData(updatedPosts));
         alert("Comment Added");
+
         return;
       } else {
         const commentId = post.comments[post?.comments?.length - 1].id + 1;
@@ -203,6 +196,18 @@ function UpdatedModal(props) {
     } catch (error) {
       alert(error);
     }
+  };
+
+  const Updatedstyle = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
   };
 
   return (

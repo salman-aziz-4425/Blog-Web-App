@@ -13,7 +13,7 @@ import { addUsers, addAllData } from '../redux/postSlicer';
 export default function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const allData = useSelector((state) => state.postHandler.allData);
+  const allUsersData = useSelector((state) => state.postHandler.allUsersData);
 
   return (
     <Box sx={{ flexGrow: 1, marginBottom: 5 }}>
@@ -39,7 +39,7 @@ export default function Navbar() {
             color="inherit"
             onClick={() => {
               localStorage.setItem('ActiveUser', 0);
-              localStorage.setItem('usersData', JSON.stringify(allData));
+              localStorage.setItem('usersData', JSON.stringify(allUsersData));
               dispatch(addUsers(0));
               dispatch(addAllData([]));
               navigate('/');
