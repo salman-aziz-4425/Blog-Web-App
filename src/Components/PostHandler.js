@@ -5,7 +5,7 @@ import {
 	Card,
 	CardContent,
 	CardActions,
-} from '@material-ui/core'
+} from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import CommentIcon from '@mui/icons-material/Comment'
 import EditIcon from '@mui/icons-material/Edit'
@@ -31,6 +31,7 @@ function PostHandler(props) {
 	const handleupdateClose = () => {
 		setUpdated(false)
 	}
+
 	const handleClose = () => {
 		setOpen(false)
 	}

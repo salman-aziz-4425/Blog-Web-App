@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Box, FormControlLabel, Switch } from '@material-ui/core'
-import { Typography } from '@material-ui/core'
+import { Box, FormControlLabel, Switch } from '@mui/material'
+import { Typography } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
 import PostHandler from '../Components/PostHandler'
 import PostForm from '../Components/PostForm'
