@@ -42,9 +42,7 @@ function SignupPage() {
 		}
 
 		if (loginSignupOption === false) {
-			let index = allData.findIndex(
-				(item) => item?.email === userData?.email
-			)
+			let index = allData.findIndex((item) => item?.email === userData?.email)
 			if (index !== -1) {
 				alert('User already exists')
 				return
@@ -67,7 +65,7 @@ function SignupPage() {
 			}
 			userCount++
 			const res = await fetch(
-				`https://jsonplaceholder.typicode.com/posts?userId=${userCount}`
+				`https://jsonplaceholder.typicode.com/posts?userId=${userCount}`,
 			)
 			const data = await res.json()
 			userData.posts = data
@@ -88,7 +86,7 @@ function SignupPage() {
 					let index = allData.findIndex(
 						(item) =>
 							item.email === userData.email &&
-							item.password === userData.password
+							item.password === userData.password,
 					)
 					if (index !== -1) {
 						toast.success('User logged in successfully')
@@ -96,10 +94,7 @@ function SignupPage() {
 						dispatch(addUsers(allData[index].userId))
 						dispatch(addAllData(allData))
 						if (typeof localStorage !== 'undefined') {
-							localStorage.setItem(
-								'ActiveUser',
-								allData[index].userId
-							)
+							localStorage.setItem('ActiveUser', allData[index].userId)
 							navigate('/Home')
 						} else {
 							throw new Error('localStorage is not defined')
@@ -146,9 +141,7 @@ function SignupPage() {
 
 	return (
 		<Container>
-			<Heading>
-				{loginSignupOption === false ? 'Sign Up' : 'Sign In'}
-			</Heading>
+			<Heading>{loginSignupOption === false ? 'Sign Up' : 'Sign In'}</Heading>
 			<Form>
 				{inputProps.map(
 					(item, index) =>
@@ -163,14 +156,10 @@ function SignupPage() {
 								value={item.value}
 								onChange={handleChange}
 							/>
-						)
+						),
 				)}
 				<ButtonWrapper>
-					<Button
-						variant="contained"
-						color="primary"
-						onClick={submitForm}
-					>
+					<Button variant="contained" color="primary" onClick={submitForm}>
 						{!loginSignupOption ? 'Sign Up' : 'Sign In'}
 					</Button>
 					<LoginLink variant="body2">
@@ -178,9 +167,7 @@ function SignupPage() {
 							? 'Already have an account?'
 							: 'Dont have a account'}
 						<Button
-							onClick={() =>
-								setloginSignupOption(!loginSignupOption)
-							}
+							onClick={() => setloginSignupOption(!loginSignupOption)}
 							color="primary"
 						>
 							{!loginSignupOption ? 'Sign In' : 'Sign Up'}

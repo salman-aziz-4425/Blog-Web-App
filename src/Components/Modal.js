@@ -73,7 +73,7 @@ function ChildModal(props) {
 									postIndex: props.postIndex,
 									postName: postinfo.title,
 									postContent: postinfo.body,
-								})
+								}),
 							)
 						}
 					>
@@ -100,15 +100,14 @@ function UpdatedModal(props) {
 		const allData = JSON.parse(localStorage.getItem('usersData'))
 		let updatedPosts = [...allData]
 		const postPostion = updatedPosts[props?.userIndex - 1].posts.findIndex(
-			(item) => item?.id === props?.postIndex
+			(item) => item?.id === props?.postIndex,
 		)
 		const post = updatedPosts[props?.userIndex - 1].posts[postPostion]
 
 		try {
 			if (Object.keys(post).includes('comments')) {
 				setComments([
-					...updatedPosts[props.userIndex - 1].posts[postPostion]
-						.comments,
+					...updatedPosts[props.userIndex - 1].posts[postPostion].comments,
 				])
 				localStorage.setItem('usersData', JSON.stringify(updatedPosts))
 			} else {
@@ -118,17 +117,14 @@ function UpdatedModal(props) {
 				axios
 					.get(
 						'https://jsonplaceholder.typicode.com/comments?postId=' +
-							props.postIndex
+							props.postIndex,
 					)
 					.then((result) => {
-						updatedPosts[props.userIndex - 1].posts[
-							postPostion
-						].comments = [...result.data]
+						updatedPosts[props.userIndex - 1].posts[postPostion].comments = [
+							...result.data,
+						]
 						setComments([...result.data])
-						localStorage.setItem(
-							'usersData',
-							JSON.stringify(updatedPosts)
-						)
+						localStorage.setItem('usersData', JSON.stringify(updatedPosts))
 					})
 					.catch((error) => {
 						alert(error)
@@ -151,12 +147,10 @@ function UpdatedModal(props) {
 
 	const handleAddComment = () => {
 		try {
-			let updatedPosts = [
-				...JSON.parse(localStorage.getItem('usersData')),
-			]
-			const postPostion = updatedPosts[
-				props?.userIndex - 1
-			].posts.findIndex((item) => item?.id === props?.postIndex)
+			let updatedPosts = [...JSON.parse(localStorage.getItem('usersData'))]
+			const postPostion = updatedPosts[props?.userIndex - 1].posts.findIndex(
+				(item) => item?.id === props?.postIndex,
+			)
 			const post = updatedPosts[props?.userIndex - 1].posts[postPostion]
 			if (post.comments.length === 0) {
 				const newComment = {
@@ -166,15 +160,12 @@ function UpdatedModal(props) {
 					postId: props?.postIndex,
 					id: 0,
 				}
-				updatedPosts[props?.userIndex - 1].posts[postPostion].comments =
-					[
-						newComment,
-						...updatedPosts[props?.userIndex - 1].posts[postPostion]
-							.comments,
-					]
+				updatedPosts[props?.userIndex - 1].posts[postPostion].comments = [
+					newComment,
+					...updatedPosts[props?.userIndex - 1].posts[postPostion].comments,
+				]
 				setComments([
-					...updatedPosts[props?.userIndex - 1].posts[postPostion]
-						.comments,
+					...updatedPosts[props?.userIndex - 1].posts[postPostion].comments,
 				])
 				localStorage.setItem('usersData', JSON.stringify(updatedPosts))
 				dispatch(addAllData(updatedPosts))
@@ -182,8 +173,7 @@ function UpdatedModal(props) {
 
 				return
 			} else {
-				const commentId =
-					post.comments[post?.comments?.length - 1].id + 1
+				const commentId = post.comments[post?.comments?.length - 1].id + 1
 				const newComment = {
 					name: updatedPosts[props?.activeIndex - 1].name,
 					email: updatedPosts[props?.activeIndex - 1].email,
@@ -191,15 +181,12 @@ function UpdatedModal(props) {
 					postId: props?.postIndex,
 					id: commentId,
 				}
-				updatedPosts[props?.userIndex - 1].posts[postPostion].comments =
-					[
-						newComment,
-						...updatedPosts[props?.userIndex - 1].posts[postPostion]
-							.comments,
-					]
+				updatedPosts[props?.userIndex - 1].posts[postPostion].comments = [
+					newComment,
+					...updatedPosts[props?.userIndex - 1].posts[postPostion].comments,
+				]
 				setComments([
-					...updatedPosts[props?.userIndex - 1].posts[postPostion]
-						.comments,
+					...updatedPosts[props?.userIndex - 1].posts[postPostion].comments,
 				])
 				localStorage.setItem('usersData', JSON.stringify(updatedPosts))
 				dispatch(addAllData(updatedPosts))
@@ -249,8 +236,7 @@ function UpdatedModal(props) {
 							marginBottom: '16px',
 							marginTop: '8px',
 							textAlign: 'center',
-							background:
-								'linear-gradient(to right, #FFD700, #FFA500)',
+							background: 'linear-gradient(to right, #FFD700, #FFA500)',
 							WebkitBackgroundClip: 'text',
 							WebkitTextFillColor: 'transparent',
 						}}
@@ -276,11 +262,7 @@ function UpdatedModal(props) {
 					</Button>
 					{comments?.length > 0 ? (
 						comments?.map((comment, index) => (
-							<Comments
-								key={index}
-								title={comment.name}
-								body={comment.body}
-							/>
+							<Comments key={index} title={comment.name} body={comment.body} />
 						))
 					) : (
 						<CircularProgress />

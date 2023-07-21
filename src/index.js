@@ -14,6 +14,6 @@ root.render(
 				<App />
 			</PersistGate>
 		</Provider>
-	</React.StrictMode>
+	</React.StrictMode>,
 )
 reportWebVitals()

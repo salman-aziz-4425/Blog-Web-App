@@ -51,8 +51,7 @@ function PostHandler(props) {
 						</Typography>
 					</CardContent>
 					<CardActions>
-						{parseInt(item.userId) ===
-							parseInt(props.activeIndex) && (
+						{parseInt(item.userId) === parseInt(props.activeIndex) && (
 							<div
 								style={{
 									display: 'flex',
@@ -66,7 +65,7 @@ function PostHandler(props) {
 											handleDeletePostState({
 												userId: item?.userId,
 												postId: item?.id,
-											})
+											}),
 										)
 									}
 									style={{ marginLeft: 'auto' }}

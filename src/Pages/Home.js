@@ -27,7 +27,7 @@ function PostManager() {
 					userId: userDatabaseID,
 					newPostTitle,
 					newPostContent,
-				})
+				}),
 			)
 			alert('Post added successfully')
 		} else {
@@ -76,15 +76,10 @@ function PostManager() {
 				</Box>
 
 				{allData.length > 0 ? (
-					<Box
-						display="flex"
-						flexDirection="column"
-						alignItems="center"
-					>
+					<Box display="flex" flexDirection="column" alignItems="center">
 						{allData.map((post) => {
 							if (
-								(view === false &&
-									post.userId === parseInt(userDatabaseID)) ||
+								(view === false && post.userId === parseInt(userDatabaseID)) ||
 								view === true
 							) {
 								return (

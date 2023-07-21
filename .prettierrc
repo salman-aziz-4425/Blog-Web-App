@@ -2,14 +2,5 @@
 	"semi": false,
 	"singleQuote": true,
 	"tabWidth": 2,
-	"useTabs": true,
-	"overrides": [
-		{
-			"files": "*.json",
-			"options": {
-				"tabWidth": 2,
-				"singleQuote": true
-			}
-		}
-	]
+	"useTabs": true
 }
