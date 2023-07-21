@@ -15,10 +15,5 @@
 		"quotes": ["error", "single"],
 		"semi": ["error", "never"],
 		"react/prop-types": 0
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "npm run lint"
-		}
 	}
 }
