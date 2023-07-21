@@ -3,6 +3,7 @@ import {
 	Button,
 	Typography,
 	Card,
+	Collapse,
 	CardContent,
 	CardActions,
 } from '@material-ui/core'
