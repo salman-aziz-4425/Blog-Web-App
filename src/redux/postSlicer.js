@@ -53,18 +53,14 @@ export const postSlice = createSlice({
 			].posts.filter((post) => {
 				return post.id !== postId
 			})
-			localStorage.setItem(
-				'usersData',
-				JSON.stringify(state.allUsersData)
-			)
+			localStorage.setItem('usersData', JSON.stringify(state.allUsersData))
 		},
 		handleUpdatePostState: (state, action) => {
 			const updatedPosts = [...state.allUsersData]
 			let postPostion = updatedPosts[
 				action.payload.userIndex - 1
 			]?.posts.findIndex((item) => item?.id === action.payload.postIndex)
-			let post =
-				updatedPosts[action.payload.userIndex - 1].posts[postPostion]
+			let post = updatedPosts[action.payload.userIndex - 1].posts[postPostion]
 			if (action.payload.postName.trim() !== '') {
 				post.title = action.payload.postName
 			}
