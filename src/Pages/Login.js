@@ -16,7 +16,7 @@ import {
 
 function SignupPage() {
 	const [userData, setUserData] = useState({
-		userId: 0,
+		userId: 1,
 		name: '',
 		email: '',
 		password: '',
