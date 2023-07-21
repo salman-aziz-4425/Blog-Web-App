@@ -1,0 +1,15 @@
+{
+	"semi": false,
+	"singleQuote": true,
+	"tabWidth": 4,
+	"useTabs": true,
+	"overrides": [
+		{
+			"files": "*.json",
+			"options": {
+				"tabWidth": 4,
+				"singleQuote": true
+			}
+		}
+	]
+}
