@@ -17,6 +17,7 @@
 		"axios": "^1.4.0",
 		"formik": "^2.4.2",
 		"husky": "^8.0.3",
+		"lint-staged": "^13.2.3",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-hot-toast": "^2.4.1",
@@ -30,14 +31,20 @@
 	},
 	"husky": {
 		"hooks": {
-			"pre-commit": "npm run lint"
+			"pre-commit": "lint-staged"
 		}
+	},
+	"lint-staged": {
+		"*.{js,jsx,css}": [
+			"eslint --fix"
+		]
 	},
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
-		"eject": "react-scripts eject"
+		"eject": "react-scripts eject",
+		"prepare": "husky install"
 	},
 	"eslintConfig": {
 		"extends": [
@@ -63,6 +70,7 @@
 		"eslint-plugin-import": "^2.25.3",
 		"eslint-plugin-jsx-a11y": "^6.5.1",
 		"eslint-plugin-react": "^7.28.0",
-		"eslint-plugin-react-hooks": "^4.3.0"
+		"eslint-plugin-react-hooks": "^4.3.0",
+		"husky": "^8.0.0"
 	}
 }
